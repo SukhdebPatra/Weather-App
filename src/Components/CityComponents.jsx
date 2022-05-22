@@ -1,54 +1,58 @@
 import React from "react";
 import styled from "styled-components";
-const WeatherLogo = styled.img`
+const SearchBox = styled.form`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 20px;
+  border: black solid 1px;
+  border-radius: 2px;
+  & input {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    font-family: Montserrat;
+    font-weight: bold;
+  }
+  & button {
+    background-color: black;
+    font-size: 14px;
+    padding: 0 10px;
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: Montserrat;
+    font-weight: bold;
+  }
+`;
+const ChooseCityLabel = styled.span`
+  color: black;
+  margin: 10px auto;
+  font-size: 18px;
+  font-weight: bold;
+`;
+const WelcomeWeatherLogo = styled.img`
   width: 140px;
   height: 140px;
   margin: 40px auto;
 `;
-const ChooseCityLabel = styled.span`
-  color: black;
-  font-size: 18px;
-  font-weight: bold;
-  margin:10px auto:
-`;
-const SearchBox = styled.form`
-  display:flex;
-  flex-direction:row;
-  border:black solid 1px;
-  border-radius:2px;
-  color: black;
-  font-size: 18px;
-  font-weight: bold;
-  margin:20px auto;
-  & input{
-    padding:10px;
-    font-size:14px;
-    border-none;
-    outline:none;
-    font-weight:Bold
-  }
-  & button{
-    padding:10px;
-    font-size:14px;
-    color:white;
-    background-color:black;
-    border-none;
-    outline:none;
-    font-weight:Bold;
-    cursor:pointer;
-  }
-`;
 
 
-const CityComponents = () => {
+const CityComponents = (props) => {
+  const { updateCity, fetchWeather } = props;
   return (
     <>
-      <WeatherLogo src="\icons\perfect-day.svg"></WeatherLogo>
+      <WelcomeWeatherLogo src="\icons\perfect-day.svg"></WelcomeWeatherLogo>
 
       <ChooseCityLabel>Find Weather Of Your City</ChooseCityLabel>
-      <SearchBox>
-        <input placeholder="City"/>
-        <button>Search</button>
+      <SearchBox onSubmit={fetchWeather}>
+      <input
+          onChange={(e) => updateCity(e.target.value)}
+          placeholder="City"
+        />
+        <button type={"submit"}>Search</button>
       </SearchBox>
     </>
   );
